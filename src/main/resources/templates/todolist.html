@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To Do List</title>
+</head>
+<body>
+<h1>ToDoList</h1>
+<form th:action="@{/todo/create}" method="post">
+    <input name="content" placeholder="오늘의 할 일!"/>
+    <button>작성</button>
+</form>
+<table>
+    <thead>
+    <tr>
+        <th>번호</th>
+        <th>할 일</th>
+        <th>수행 여부</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="todoentity : ${toDoList}">
+        <td th:text="${todoentity.id}"></td>
+        <td th:text="${todoentity.content}"></td>
+        <td th:text="${todoentity.completed}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
