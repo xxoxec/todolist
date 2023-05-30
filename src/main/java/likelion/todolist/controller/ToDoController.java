@@ -33,10 +33,16 @@ public class ToDoController {
         return "redirect:/todo";
     }
 
-    // 삭제 코드
     @PostMapping("/todo/{todoId}/delete")
     public String todoDelete(@PathVariable("todoId") Long todoId) {
         toDoService.deleteTodo(todoId);
+        return "redirect:/todo";
+    }
+
+    // Update 코드
+    @PostMapping("/todo/update")
+    public String todoUpdate(Long todoId, String content) {
+        toDoService.updateTodo(todoId, content, false);
         return "redirect:/todo";
     }
 }

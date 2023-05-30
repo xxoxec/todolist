@@ -17,11 +17,10 @@ public class ToDoRepository {
         if (todo.getId() == null) {
             em.persist(todo);
         } else {
-            em.merge(todo);
+            em.merge(todo); // 이 부분이 update를 도와주는 코드
         }
     }
 
-    // 삭제 코드 추가
     public void delete(ToDo todo) {
         em.remove(todo);
     }
