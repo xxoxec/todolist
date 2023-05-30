@@ -5,9 +5,7 @@ import likelion.todolist.service.ToDoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,6 +30,13 @@ public class ToDoController {
     @PostMapping("/todo/create")
     public String todoCreate(@RequestParam String content){
         toDoService.saveTodo(content);
+        return "redirect:/todo";
+    }
+
+    // 삭제 코드
+    @PostMapping("/todo/{todoId}/delete")
+    public String todoDelete(@PathVariable("todoId") Long todoId) {
+        toDoService.deleteTodo(todoId);
         return "redirect:/todo";
     }
 }
