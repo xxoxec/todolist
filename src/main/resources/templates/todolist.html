@@ -17,15 +17,53 @@
         <th>번호</th>
         <th>할 일</th>
         <th>수행 여부</th>
+        <th>삭제</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="todoentity : ${toDoList}">
+    <tr th:each="todoentity, todoStat : ${toDoList}">
         <td th:text="${todoentity.id}"></td>
         <td th:text="${todoentity.content}"></td>
         <td th:text="${todoentity.completed}"></td>
+        <td>
+            <button id="delete-btn"
+                    th:onclick="deleteTodo([[${todoentity.id}]])" method="post">삭제
+            </button>
+        </td>
+        <td>
+            <button id="reviseBtn"
+                    th:onclick="openCloseInput('form-'+[[${todoStat.index}]])">수정
+            </button>
+        </td>
+        <td>
+            <form th:action="@{/todo/update}" th:id="'form-' + ${todoStat.index}" method="post"
+                  style="display: none">
+                <input name="todoId" th:value="${todoentity.id}" style="display: none"/>
+                <input name="content" placeholder="새로운 내용을 입력하세요"/>
+                <button>작성</button>
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>
 </body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    function deleteTodo(id) {
+        var form = document.createElement("form");
+        form.setAttribute("method", "post");
+        form.setAttribute("action", "/todo/" + id + "/delete");
+        document.body.appendChild(form);
+        form.submit();
+    }
+
+    function openCloseInput(formId) {
+        var form = document.getElementById(formId);
+        if (form.style.display == "none") {
+            form.style.display = "block";
+        } else {
+            form.style.display = 'none';
+        }
+    }
+</script>
 </html>
