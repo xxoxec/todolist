@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To Do List</title>
+</head>
+<body>
+<h1>ToDoList</h1>
+<form>
+    <label for="todo-desc">새 할일: <input type="text" id="todo-desc">
+    </label>
+    <input type="submit" value="생성">
+</form>
+<table>
+    <thead>
+    <tr>
+        <th>번호</th>
+        <th>할 일</th>
+        <th>수행 여부</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="todoentity : ${toDoList}">
+        <td th:text="${todoentity.id}"></td>
+        <td th:text="${todoentity.content}"></td>
+        <td th:text="${todoentity.completed}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
