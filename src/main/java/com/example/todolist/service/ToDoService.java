@@ -30,4 +30,13 @@ public class ToDoService {
     public List<ToDo> findToDos() {
         return toDoRepository.findAll();
     }
+
+    // 삭제 코드
+    @Transactional
+    public void deleteTodo(Long id) {
+        ToDo findTodo = toDoRepository.findOne(id);
+        if (findTodo == null)
+            throw new IllegalArgumentException("해당 아이템이 없습니다.");
+        toDoRepository.delete(findTodo);
+    }
 }
