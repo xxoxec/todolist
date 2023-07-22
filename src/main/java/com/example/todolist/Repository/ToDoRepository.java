@@ -33,5 +33,10 @@ public class ToDoRepository {
         return em.createQuery("select i from ToDo i", ToDo.class)
                 .getResultList();
     }
+
+    // 삭제 코드 추가
+    public void delete(ToDo todo) {
+        em.remove(todo);
+    }
 }
 
